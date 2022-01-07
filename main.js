@@ -1,4 +1,23 @@
-// ---------------------------------------------------------------------------
+/*** -------------------------------------------------------------------------
+ * Electron main file
+ *
+ * Author: jens@bennerhq.com, 2019
+ */
+
+ /***
+ * "THE BEER-WARE LICENSE" (Revision 43):
+ * 
+ * As long as you retain this notice you can do whatever you want with this 
+ * stuff. If we meet some day, and you think this stuff is worth it, you can 
+ * buy me a beer in return.
+ * 
+ * Thanks, 
+ * Jens Kaas Benner
+ * 
+ * [https://en.wikipedia.org/wiki/Beerware]
+ */
+
+ // ---------------------------------------------------------------------------
 const electron = require('electron')
 
 // Modules to control application life and create native browser window
