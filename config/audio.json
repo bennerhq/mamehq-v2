@@ -1,0 +1,28 @@
+{
+    "audio_welcome":     [
+        "{path_audio}pacman/pacman_beginning.wav",
+        "{path_audio}pacman/pacman_intermission.wav",
+        "{path_audio}galaga/8d82b5_Galaga_Theme_Song.mp3",
+        "{path_audio}mario/8d82b5_Super_Mario_Bros_Stage_Clear_Sound_Effect.mp3",
+        "{path_audio}mario/8d82b5_Super_Mario_Bros_World_Clear_Sound_Effect.mp3",
+        "{path_audio}mario/8d82b5_Dr_Mario_64_Woo_Hoo_Here_We_Go_Sound_Effect.mp3"
+    ],
+    "audio_play":        [
+        "{path_audio}pacman/pacman_eatfruit.wav",
+        "{path_audio}mario/8d82b5_Mario_Kart_64_Mario_Whee_Hee_Sound_Effect.mp3",
+        "{path_audio}galaga/8d82b5_Galaga_Firing_Sound_Effect.mp3"
+    ],
+    "audio_poweroff": [
+        "{path_audio}pacman/pacman_death.wav",
+        "{path_audio}mario/8d82b5_SM64_Thank_You_For_To_Playing_My_Game_Sound_Effect.mp3",
+        "{path_audio}mario/8d82b5_SMW_Mario_Death_Sound_Effect.mp3",
+        "{path_audio}mario/8d82b5_Super_Mario_64_Game_Over_Sound_Effect.mp3",
+        "{path_audio}mario/8d82b5_Super_Mario_Bros_Game_Over_Sound_Effect.mp3",
+        "{path_audio}mario/8d82b5_Super_Mario_Bros_Game_Over_Sound_Effect.mp3"
+    ],
+    "audio_waiting": [
+        "audio_welcome",
+        "audio_play",
+        "audio_poweroff"
+    ]
+}

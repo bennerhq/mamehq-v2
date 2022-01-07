@@ -1,0 +1,57 @@
+{
+    "shutdown": [
+        {
+            "shutdown-headline": "SHUTDOWN",
+            "shutdown-body": "You Can Run, But You Can't Hide, for ever! Are you sure you want to quit now?"
+        },{
+            "shutdown-headline": "SHUTDOWN",
+            "shutdown-body": "You Can Run, But You Can't Hide! Are you sure you want to quit?"
+        },{
+            "shutdown-headline": "SHUTDOWN",
+            "shutdown-body": "It's fun to play retro games! Do you relly want to quit now?"
+        },{
+            "shutdown-headline": "SHUTDOWN",
+            "shutdown-body": "Come on! It's not the time to quit now, rigt?"
+        }
+    ],
+    "splash-start": [
+        {
+            "splash-start-headline": "Hello, world!"
+        },{
+            "splash-start-headline": "The Rumble in the Jungle"
+        },{
+            "splash-start-headline": "Game On!"
+        },{
+            "splash-start-headline": "It’s a-me, Mario!"
+        },{
+            "splash-start-headline": "Finish Him!"
+        },{
+            "splash-start-headline": "Kill 'em all"
+        },{
+            "splash-start-headline": "Waka Waka Waka"
+        },{
+            "splash-start-headline": "Ready?"
+        }
+    ],
+    "splash-poweroff": [
+        {
+            "splash-poweroff-headline": "Goodbye!"
+        },{
+            "splash-poweroff-headline": "Over & out"
+        },{
+            "splash-poweroff-headline": "Thank You!"
+        },{
+            "splash-poweroff-headline": "Fuck It!"
+        },{
+            "splash-poweroff-headline": "Never Again?"
+        },{
+            "splash-poweroff-headline": "... What?"
+        },{
+            "splash-poweroff-headline": "Chicken out?"
+        },{
+            "splash-poweroff-headline": "Mayby next time?"
+        },{
+            "splash-poweroff-headline": "Next time buddy!"
+        }
+    ]
+}

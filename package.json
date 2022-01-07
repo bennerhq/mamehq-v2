@@ -1,0 +1,22 @@
+{
+  "name": "mamehq",
+  "version": "1.0.0",
+  "description": "MAME frontend",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/bennerhq/mamehq",
+  "keywords": [
+    "mame",
+    "frontend",
+    "electron",
+    "cross",
+    "platform"
+  ],
+  "author": "bennerhq",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^16.0.5"
+  }
+}

@@ -1,0 +1,316 @@
+/*** -------------------------------------------------------------------------
+ * Main CSS stuff
+ *
+ * Author: jens@bennerhq.com, 2019
+ */
+
+ /***
+ * "THE BEER-WARE LICENSE" (Revision 43):
+ * 
+ * As long as you retain this notice you can do whatever you want with this 
+ * stuff. If we meet some day, and you think this stuff is worth it, you can 
+ * buy me a beer in return.
+ * 
+ * Thanks, 
+ * Jens Kaas Benner
+ * 
+ * [https://en.wikipedia.org/wiki/Beerware]
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	text-overflow: ellipsis;
+
+	font-family: courier;
+	background-color: black;
+	color: green;
+}
+
+::-webkit-scrollbar{
+	display: none;
+}
+
+/* --------------------------------------------------------------
+ * DISPLAY ELEMENTS
+ */
+
+.fullscreen {
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.popup {
+	display: none;
+	z-index: 99;
+}
+
+/* --------------------------------------------------------------
+ * CONTAINERS
+ */
+#splash-start-container {
+	display: block;
+	text-align: center;
+}
+
+#splash-start-headline {
+	color: darkgray; 
+	font-weight: normal; 
+	font-style: italic;
+	font-size: 200%;
+	margin-top: 150px;
+}
+
+#splash-poweroff-container {
+	display: none;
+	text-align: center;
+}
+
+#splash-poweroff-headline {
+	color: darkgray; 
+	font-weight: normal; 
+	font-style: italic;
+	font-size: 200%;
+	margin-top: 150px;
+}
+
+#main-container {
+	display: none;
+}
+
+/* --------------------------------------------------------------
+ * GRID
+ */
+.grid-one {
+	display: inline-block;
+	border: 2px solid rgba(0,0,0,1);
+}
+
+.grid-now {
+	border: 2px solid gray !important;
+	color: green;
+	background-color: black;
+}
+
+.grid-now-focus {
+	border: 2px solid white !important;
+	color: white;
+}
+
+/* --------------------------------------------------------------
+ * GRID: CARD
+ */
+.card-one {
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+
+	width: 240px;
+	height: 320px;
+
+	border: 2px solid rgb(41,41,41);
+}
+
+.card-image {
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.card-info {
+	background-color: rgba(1,1,1,0.8);
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	padding-left: 5px;
+	padding-right: 15px;
+
+	width: 220px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.card-description {
+	font-weight: bold;
+}
+
+.card-year {
+	font-style: italic;
+}
+
+.card-special {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.card-special-item {
+	display: inline-block;
+	margin-top: 2px;
+	margin-left: 2px;
+	margin-right: 2px;
+	background-color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	border-width: 2px;
+	border-style: solid;
+	border-color: inherit;
+}
+
+/* --------------------------------------------------------------
+ * CONTROLLER
+ */
+ #controller {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.controller-one {
+	background: rgb(21,21,21);
+	border-width: 2px;
+	border: 2px solid rgba(0,0,0,1);
+	width: 90px;
+	height: 90px;
+	line-height: 110px;
+	vertical-align: middle;
+	margin-bottom: 7px;
+}
+
+/* --------------------------------------------------------------
+ * CARDS
+ */
+ .cards {
+	display: inline-block;
+
+	width: 100%;
+	max-height: 100%;
+
+	overflow-x: scroll;
+	padding-top: 5px;
+}
+
+/* --------------------------------------------------------------
+ * SEARCH
+ */
+ #search-popup {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	background-color: rgba(0,0,0,0.9);
+	padding: 10px;
+	border-top: 2px solid rgb(51,51,51);
+}
+
+.search-popup-inner {
+	max-width: 680px;
+	margin: 0 auto;
+	font-size: 300%;
+}
+
+.search-letters {
+	display: block;
+	text-align: center;
+}
+
+.search-letters-item {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	border: 2px solid rgba(0,0,0,1);
+}
+
+.search-input {
+	display: block;
+	width: 100%;
+	border-bottom: 2px solid green;
+	margin-bottom: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* --------------------------------------------------------------
+ * SHUTDOWN
+ */
+#shutdown-fullscreen {
+	background-color: rgba(0,0,0,0.8);
+	z-index: 1;
+	font-size: 150%;
+}
+
+#shutdown-dialogue {
+	width: 510px;
+	margin: auto;
+	background-color: black;
+}
+
+#shutdown-grid {
+	text-align: center;
+}
+
+.screen-center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	min-height: 100vh;
+}
+
+#shutdown-headline {
+	font-size: 140%;
+	font-weight: bold;
+}
+
+#shutdown-body {
+	margin: 20px;
+	font-style: italic;
+}
+
+.shutdown-one {
+	display: inline-block;
+	font-size: 140%;
+	width: 120px;
+	margin: 10px;
+	padding: 10px;
+	background: rgb(11,11,11);
+}
+
+/* --------------------------------------------------------------
+ * PLAY
+ */
+#play-fullscreen {
+	background-color: rgba(0,0,0,0.8);
+	z-index: 2;
+ }
+
+#play-dialogue {
+	width: 500px;
+	margin: auto;
+	background-color: black;
+	border: 2px solid rgb(41,41,41);
+	padding: 10px;
+}
+
+.play-image {
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+}

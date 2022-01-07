@@ -1,0 +1,22 @@
+{
+    "color_on":                 "rgb(000,128,000)",
+    "color_off":                "rgb(048,048,048)",
+    "color_focus":              "rgb(255,255,255)",
+    "color_replace":            "white",
+
+    "url_image_arcade_icon":    "{path_image}svg/icons/arcade-icon.svg",
+
+    "url_ok":                   "{path_image}svg/buttons/ok.svg",
+    "url_no":                   "{path_image}svg/buttons/no.svg",
+    "url_shuffle":              "{path_image}svg/buttons/shuffle.svg",
+    "url_favorits":             "{path_image}svg/buttons/favorits.svg",
+    "url_last":                 "{path_image}svg/buttons/last.svg",
+    "url_most":                 "{path_image}svg/buttons/most.svg",
+    "url_search":               "{path_image}svg/buttons/search.svg",
+    "url_good":                 "{path_image}svg/buttons/good.svg",
+    "url_bad":                  "{path_image}svg/buttons/bad.svg",
+    "url_two":                  "{path_image}svg/buttons/two.svg",
+    "url_terminal":             "{path_image}svg/buttons/terminal.svg",
+    "url_shutdown-on":          "{path_image}svg/buttons/shutdown-on.svg",
+    "url_shutdown":             "{path_image}svg/buttons/shutdown.svg"
+}

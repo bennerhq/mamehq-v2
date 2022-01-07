@@ -1,0 +1,8 @@
+{
+    "keyUp":                    "ArrowUp",
+    "keyDown":                  "ArrowDown",
+    "keyLeft":                  "ArrowLeft",
+    "keyRight":                 "ArrowRight",
+    "keySelect":                "ControlLeft Enter",
+    "keyActivate":              "AltLeft"
+}

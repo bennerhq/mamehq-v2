@@ -1,0 +1,24 @@
+{
+    "path_config":      "./config/",
+    "path_storage":     "./storage/",
+    "path_data":        "./roms/",
+    "path_image":       "./image/",
+    "path_audio":       "./audio/",
+    "path_mame":        "../mame/",
+    "path_mame_image":  "{path_mame}",
+
+    "storage":          "{path_storage}{name}.json",
+    "snap":             "{path_mame_image}snap/{name}.png",
+    "marquees":         "{path_mame_image}marquees/{name}.png",
+
+    "url_localization": "{path_config}localization.json",
+
+    "url_keys":         "{path_config}keys.json",
+    "url_cmds":         "{path_config}cmds.json",
+    "url_images":       "{path_config}images.json",
+
+    "url_audio":        "{path_config}audio.json",
+
+    "url_verifyroms":   "{path_data}verifyroms.txt",
+    "url_listxml":      "{path_data}listxml.xml"
+}

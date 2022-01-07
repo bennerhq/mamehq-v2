@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 613 613" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1.67672,0,0,1.67672,-100.19,-90.073)">
+        <g transform="matrix(0.659426,0,0,0.691776,33.38,23.7338)">
+            <path d="M317.2,44.553C470.001,44.553 594.056,162.415 594.056,307.589C594.056,452.762 470.001,570.625 317.2,570.625C164.4,570.625 40.345,452.762 40.345,307.589C40.345,162.415 164.4,44.553 317.2,44.553ZM317.2,87.549C445.024,87.549 548.801,186.146 548.801,307.589C548.801,429.032 445.024,527.629 317.2,527.629C189.377,527.629 85.6,429.032 85.6,307.589C85.6,186.146 189.377,87.549 317.2,87.549Z" style="fill:white;"/>
+        </g>
+        <g transform="matrix(1.67898,0,0,1.67898,-200.658,-208.275)">
+            <text x="170.971px" y="320.524px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:154.73px;fill:white;">2P</text>
+        </g>
+    </g>
+</svg>
