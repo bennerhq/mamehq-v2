@@ -134,13 +134,9 @@ class Application {
 				counter ++;
 				executeShellCommand(shell_cmd_idlecheck, (error, stdout, stderr) => {
 					if (counter >= idle_time_poweroff_min) {
-						console.log('[app] idle timer expired ... power off!...', counter);
-	
 						self.poweroff();
 					} else {
-						console.log('[app] idle timer ... make some noice!', counter, idle_time_poweroff_min);
-
-						resources.playId('audio_welcome', 'audio_play', 'audio_poweroff');
+						resources.playId('audio_waiting');
 					}
 				});
 			}, 1000 * 60 * idle_time_interval_min);

@@ -1,7 +1,7 @@
 /*** -------------------------------------------------------------------------
  * Electron main file
  *
- * Author: jens@bennerhq.com, 2019
+ * Author: jens@bennerhq.com, 2022
  */
 
  /***
