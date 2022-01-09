@@ -17,7 +17,45 @@
  * [https://en.wikipedia.org/wiki/Beerware]
  */
 
- "use strict";
+"use strict";
+
+function setupCatchKeys() {
+	let self = this;
+
+	if (!isElectron()) {
+		return;
+	}
+
+	const child_process = require('child_process');
+	if (!child_process) return;
+
+	var shell_cmd_key_catch = resources.getId("shell_cmd_key_catch");
+	if (!shell_cmd_key_catch) return;
+
+	var child = child_process.spawn(shell_cmd_key_catch, [], {
+			encoding: 'utf8',
+			shell: true
+	});
+
+	child.on('error', (error) => {
+		console.log('[keyboard] catch error...', error);
+	});
+
+	child.stdout.setEncoding('utf8');
+	child.stdout.on('data', (data) => {
+		idleTimer = new Date();
+		console.log('[keyboard] resetting ...', idleTimer);
+	});
+
+	child.stderr.setEncoding('utf8');
+	child.stderr.on('data', (data) => {
+		console.log('[keyboard] catch stderr...', data);
+	});
+
+	child.on('close', (code) => {
+		console.log('[keyboard] catch close...', code);
+	});
+}
 
 class Keyboard {
 
@@ -44,6 +82,8 @@ class Keyboard {
 
 			self.keydown(event);
 		});
+
+		setupCatchKeys();
 
 		// Install kill switch!...
 		$("body").click((event) => {

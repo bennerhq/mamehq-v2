@@ -7,6 +7,8 @@
     "path_mame":        "../mame/",
     "path_mame_image":  "{path_mame}",
 
+    "url_private":      "{path_storage}private.json",
+
     "storage":          "{path_storage}{name}.json",
     "snap":             "{path_mame_image}snap/{name}.png",
     "marquees":         "{path_mame_image}marquees/{name}.png",

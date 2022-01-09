@@ -186,7 +186,7 @@ class Application {
 			if (shell_cmd_idlecheck && isElectron()) {
 				executeShellCommand(cmd, (error, stdout, stderr) => {
 					var msecs = parseInt(stdout); 
-					if (Number.isInteger(msecs)) {
+					if (Number.isInteger(msecs) && msecs) {
 						callback(msecs);
 					}
 					else {

@@ -85,6 +85,10 @@ function isElectron() {
 	return (userAgent.indexOf(' electron/') > -1);
 }
 
+function isWeb() {
+	return !isElectron();
+}
+
 /***
  * Source:
  *      https://stackoverflow.com/questions/35079548/how-to-call-shell-script-or-python-script-in-from-a-atom-electron-app
