@@ -93,18 +93,39 @@ function isWeb() {
  * Source:
  *      https://stackoverflow.com/questions/35079548/how-to-call-shell-script-or-python-script-in-from-a-atom-electron-app
  */
+let executeHandler = null;
+
 function executeShellCommand(command, callback) {
 	callback = callback || function() {};
 
 	if (isElectron() && command !== "") {
 		const exec = require('child_process').exec;
-		exec(command, callback);
+		executeHandler = exec(command, (error, stdout, stderr) => {
+			executeHandler = null;
+
+			callback(error, stdout, stderr);
+		});
 	}
 	else {
 		console.log("[executeShellCommand] ", command)
 
 		callback(null, null, null); 
 	}
+}
+
+function executeIsRunning() {
+	return executeHandler != null;
+}
+
+function executeKill() {
+	if (executeHandler) {
+		executeHandler.kill();
+		executeHandler = null;
+
+		return true;
+	}
+
+	return false;
 }
 
 function appCmd(cmd) {

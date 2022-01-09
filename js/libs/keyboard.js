@@ -17,70 +17,87 @@
  * [https://en.wikipedia.org/wiki/Beerware]
  */
 
- "use strict";
+"use strict";
 
- var playerKeyCatching = false;
- var playerOneKeyCounter = 0;
- var playerTwoKeyCounter = 0;
- 
- function setupCatchKeys() {
-	 let self = this;
- 
-	 if (!isElectron()) {
-		 return;
-	 }
- 
-	 const child_process = require('child_process');
-	 if (!child_process) return;
- 
-	 let shell_cmd_key_catch = resources.getId("shell_cmd_key_catch");
-	 if (!shell_cmd_key_catch) return;
- 
-	 let oneKeys = resources.getId("playerOneKeys").split(",");
-	 let twoKeys = resources.getId("playerTwoKeys").split(",");
- 
-	 var child = child_process.spawn(shell_cmd_key_catch, [], {
-			 encoding: 'utf8',
-			 shell: true
-	 });
- 
-	 child.on('error', (error) => {
-		 console.log('[keyboard] catch error...', error);
-	 });
- 
-	 child.stdout.setEncoding('utf8');
-	 child.stdout.on('data', (data) => {
-		 idleTimer = new Date();
-		 playerKeyCatching = true;
- 
-		 data = data.toString();
- 
-		 for (var i=0; i < oneKeys.length; i++) {
-			 if (data.indexOf(oneKeys[i]) !== -1) {
-				 playerOneKeyCounter ++;
-			 }
-		 }
- 
-		 for (var i=0; i < twoKeys.length; i++) {
-			 if (data.indexOf(twoKeys[i]) !== -1) {
-				 playerTwoKeyCounter ++;
-			 }
-		 }
-	 });
- 
-	 child.stderr.setEncoding('utf8');
-	 child.stderr.on('data', (data) => {
-		 console.log('[keyboard] catch stderr...', data);
-	 });
- 
-	 child.on('close', (code) => {
-		 console.log('[keyboard] catch close...', code);
- 
-		 playerKeyCatching = false;
-	 });
- }
- 
- class Keyboard {
+/*** ---------------------------------------------------------------------- */
+
+var KeyboardMonitor = {
+	playerOneKeyCounter: 0,
+	playerTwoKeyCounter: 0,
+
+	isTwoPlayer: () => {
+		return	KeyboardMonitor.playerOneKeyCounter > KEY_PLAYER_COUNTER && 
+				KeyboardMonitor.playerTwoKeyCounter > KEY_PLAYER_COUNTER;
+	},
+
+	reset: () => {
+		KeyboardMonitor.playerOneKeyCounter = 0;
+		KeyboardMonitor.playerTwoKeyCounter = 0;
+	},
+
+	initialize: function() {
+		if (!isElectron()) {
+			return;
+		}
+
+		const child_process = require('child_process');
+		if (!child_process) return;
+
+		let shell_cmd_key_catch = resources.getId("shell_cmd_key_catch");
+		if (!shell_cmd_key_catch) return;
+
+		let oneKeys = resources.getId("playerOneKeys");
+		if (!oneKeys) return;
+
+		let twoKeys = resources.getId("playerTwoKeys");
+		if (!twoKeys) return;
+
+		this.reset();
+		oneKeys = oneKeys.split(",");
+		twoKeys = twoKeys.split(",");
+
+		var child = child_process.spawn(shell_cmd_key_catch, [], {
+				encoding: 'utf8',
+				shell: true
+		});
+
+		child.stdout.setEncoding('utf8');
+		child.stdout.on('data', (stdout) => {
+			idleTimer = new Date();
+
+			stdout = stdout.toString();
+
+			oneKeys.forEach((item) => {
+				if (stdout.indexOf(item) === -1) return;
+
+				KeyboardMonitor.playerOneKeyCounter ++;
+			});
+
+			twoKeys.forEach((item) => {
+				if (stdout.indexOf(item) === -1) return;
+
+				KeyboardMonitor.playerTwoKeyCounter ++;
+			});
+		});
+
+		child.stderr.setEncoding('utf8');
+		child.stderr.on('data', (data) => {
+			console.log('[keyboard] catch stderr...', data);
+		});
+
+		child.on('error', (error) => {
+			console.log('[keyboard] catch error...', error);
+		});
+
+		child.on('close', (code) => {
+			console.log('[keyboard] catch close...', code);
+		});
+	}
+};
+
+/*** ---------------------------------------------------------------------- */
+
+class Keyboard {
  
 	 constructor(config) {
 		 var self = this;
@@ -106,7 +123,7 @@
 			 self.keydown(event);
 		 });
  
-		 setupCatchKeys();
+		 KeyboardMonitor.initialize();
  
 		 // Install kill switch!...
 		 $("body").click((event) => {

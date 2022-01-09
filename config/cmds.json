@@ -1,8 +1,7 @@
 {
     "shell_cmd_play":           "cd {path_mame};mame -skip_gameinfo {name}",
-    "shell_cmd_play_close":     "xdotool key x",
     "shell_cmd_shutdown":       "shutdown -P 0",
-    "shell_cmd_key_catch":      "echo {sudo} | sudo -S evtest /dev/input/event2",
+    "shell_cmd_key_catch":      "echo {sudo-pw} | sudo -S evtest /dev/input/event2",
     "idle_time_interval_min":   "7",
     "idle_time_poweroff_min":   "31"
 }

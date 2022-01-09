@@ -30,8 +30,6 @@
 		 this.names = null;
 		 this.years = null;
  
-		 this.iamPlaying = false;
- 
 		 this.db = new loki("games.db");
 		 this.users = this.db.addCollection("users");
  
@@ -212,15 +210,13 @@
 		 this.makeRomList(roms);
 	 }
  
-	 isPlaying() {
-		 return this.iamPlaying;
-	 }
- 
 	 play(name, callback) {
 		 var self = this;
  
-		 var today = new Date();
- 
+		 var shell_cmd_play = resources.getId("shell_cmd_play", {"{name}": name});
+		 if (!shell_cmd_play) return;
+
+		 var today = new Date(); 
 		 var tracking = this.played[name];
 		 if (!tracking) {
 			 tracking = {
@@ -228,7 +224,6 @@
 				 counter: 0,
 			 };
 		 }
- 
 		 tracking.last = today;
 		 tracking.counter ++;
  
@@ -240,40 +235,19 @@
 		 card.last = tracking.last;
 		 card.counter = tracking.counter;
  
-		 this.iamPlaying = true;
-
-		 playerOneKeyCounter = 0;
-		 playerTwoKeyCounter = 0;
+		 KeyboardMonitor.reset();
  
-		 var cmd = resources.getId("shell_cmd_play", {"{name}": name});
-		 if (!cmd) return;
- 
-		 executeShellCommand(cmd, (error, stdout, stderr) => { 
+		 executeShellCommand(shell_cmd_play, (error, stdout, stderr) => { 
 			 var running = error === null;
  
 			 self.setWorking(card, running);
 
-			 if (playerTwoKeyCounter > TWO_PLAYER_KEY_COUNTER) {
+			 if (KeyboardMonitor.isTwoPlayer()) {
 				 self.setTwoPlayer(name);
 			 }
- 
-			 this.iamPlaying = false;
- 
+
 			 callback(running);
 		 }); 
-	 }
- 
-	 playClose(callback) {
-		 if (this.isPlaying()) {
-			 var cmd = resources.getId("shell_cmd_play_close");
-			 executeShellCommand(cmd, (error, stdout, stderr) => { 
-				 this.iamPlaying = false;
-				 callback(true);
-			 });
-		 }
-		 else {
-			 callback(false);
-		 }
 	 }
  
 	 search(text) {
