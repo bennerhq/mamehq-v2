@@ -125,22 +125,7 @@ class Application {
 			}
 		});
 
-		let idle_time_interval_min = parseInt(resources.getId("idle_time_interval_min"));
-		let idle_time_poweroff_min = parseInt(resources.getId("idle_time_poweroff_min"));
-		let shell_cmd_idlecheck = resources.getId("shell_cmd_idlecheck");
-		if (idle_time_interval_min && idle_time_poweroff_min && shell_cmd_idlecheck) {
-			let counter = 0;
-			setInterval(() => {
-				counter ++;
-				executeShellCommand(shell_cmd_idlecheck, (error, stdout, stderr) => {
-					if (counter >= idle_time_poweroff_min) {
-						self.poweroff();
-					} else {
-						resources.playId('audio_waiting');
-					}
-				});
-			}, 1000 * 60 * idle_time_interval_min);
-		}
+		this.setupPoweroff();
 
 		$( window ).resize(() => {
 			self.cards.config.width = window.innerWidth - FIXME_WIDTH;
@@ -163,6 +148,58 @@ class Application {
 				});
 			}, 4000);
 		});
+	}
+
+	setupPoweroff() {
+		var self = this;
+
+		let idle_time_interval_min = parseInt(resources.getId("idle_time_interval_min"));
+		if (!idle_time_interval_min) return;
+
+		let idle_time_poweroff_min = parseInt(resources.getId("idle_time_poweroff_min"));
+		if (!idle_time_poweroff_min) return;
+
+		let shell_cmd_idlecheck = resources.getId("shell_cmd_idlecheck");
+
+		let poweroffChecker = (msecs) => {
+			let minutes = Math.round(msecs / 60000); // milliseconds -> minutes
+			if (minutes >= idle_time_poweroff_min) {
+				if (games.isPlaying()) {
+					games.playClose();
+				}
+				else {
+					self.poweroff();
+				}
+			} else if (minutes >= idle_time_interval_min) {
+				resources.playId('audio_waiting');
+			}
+		};
+
+		let getIdleTimer = (callback) => {
+			let getIdleLocal = () => {
+				var nowTimer = new Date();
+				var msecs = nowTimer - idleTimer;
+
+				callback(msecs);
+			};
+
+			if (shell_cmd_idlecheck && isElectron()) {
+				executeShellCommand(cmd, (error, stdout, stderr) => {
+					var msecs = parseInt(stdout); 
+					if (Number.isInteger(msecs)) {
+						callback(msecs);
+					}
+					else {
+						getIdleLocal();
+					}
+				});
+			}
+			else {
+				getIdleLocal();
+			}
+		};
+
+		setInterval(getIdleTimer, 1000 * 60, poweroffChecker); // Check every minutes!
 	}
 
 	show() {

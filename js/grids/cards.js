@@ -77,6 +77,22 @@ class Cards extends Grid {
 		this.clearHTML();
 	}
 
+	onePlayer() {
+		var card = this.cards[this.current];
+
+		games.toggleTwoPlayer(card.name);
+
+		this.clearHTML();
+	}
+
+	twoPlayer() {
+		var card = this.cards[this.current];
+
+		games.toggleTwoPlayer(card.name);
+
+		this.clearHTML();
+	}
+
 	placeSection(section) {
 		var newPos = this.sections[section];
 		if (newPos >= 0) {

@@ -32,12 +32,16 @@ class Keyboard {
 		this.config.keyRight = resources.getId("keyRight").split(" ");
 		this.config.keySelect = resources.getId("keySelect").split(" ");
 		this.config.keyActivate = resources.getId("keyActivate").split(" ");
+		this.config.keyOnePlayer = resources.getId("keyOnePlayer").split(" ");
+		this.config.keyTwoPlayer = resources.getId("keyTwoPlayer").split(" ");
 
 		this.config.onChange = this.config.onChange || function() {};
 
 		this.theGrid = null;
 
 		document.addEventListener('keydown', function(event) {
+			idleTimer = new Date();
+
 			self.keydown(event);
 		});
 
@@ -90,6 +94,14 @@ class Keyboard {
 
 		if (this.config.keyActivate.indexOf(event.code) !== -1) {
 			taken = this.theGrid.activate(current);
+		}
+
+		if (this.config.keyOnePlayer.indexOf(event.code) !== -1) {
+			taken = this.theGrid.onePlayer(current);
+		}
+
+		if (this.config.keyTwoPlayer.indexOf(event.code) !== -1) {
+			taken = this.theGrid.twoPlayer(current);
 		}
 
 		if (taken) {

@@ -4,5 +4,7 @@
     "keyLeft":                  "ArrowLeft",
     "keyRight":                 "ArrowRight",
     "keySelect":                "ControlLeft Enter",
-    "keyActivate":              "AltLeft"
+    "keyActivate":              "AltLeft",
+    "keyOnePlayer":             "Digit1",
+    "keyTwoPlayer":             "Digit2"
 }

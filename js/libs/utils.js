@@ -121,7 +121,7 @@ function appCmd(cmd) {
 function elapsedString(msec) {
 	var seconds = msec / 1000;
 
-	var years = Math.floor(seconds / (3600*24*356));
+	var years = Math.floor(seconds / (3600*24*365));
 	if (years) {
 		return Math.round(years * 10) / 10 + "y";
 	}

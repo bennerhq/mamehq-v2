@@ -49,7 +49,6 @@ class Resources {
 	getId(id, all) {
 		var item = this.cache[id];
 		if (!item) {
-			console.warn('getId failed: ' + id);
 			return null;
 		}
 
@@ -171,7 +170,7 @@ class Resources {
 		let type = !config.on ? "off" : (config.focus ? "focus" : "on");
 		let id = "url_" + config.id;
 		let fullId = id + '-' + type;
-		let buttonId = fullId + '/' + config.width + '/' + config.height;
+		let buttonId = fullId + '-' + config.width + 'x' + config.height;
 
 		let str = this.getId(buttonId);
 		if (str) {
@@ -214,16 +213,20 @@ class Resources {
 	}
 
 	playId(id) {
-		var list = this.getId(id);
-		if (Array.isArray(list)) {
-			id = list[Math.floor(Math.random() * list.length)];
+		var item = this.getId(id);
+		if (Array.isArray(item)) {
+			id = item[Math.floor(Math.random() * item.length)];
 			this.playId(id);
 			return;
 		}
 
-		var audio = new Audio(id);
-		if (audio) {
-			audio.play();
+		if (item === null) {
+			item = new Audio(id);
+			this.setId(id, item);
+		}
+
+		if (item) {
+			item.play();
 		}
 		else {
 			console.warn("*** ERROR: Can't audio play " + id);

@@ -28,11 +28,13 @@ class Grid {
 		this.config.classNow = config.classNow || "grid-now";
 		this.config.classFocus = config.classFocus || "grid-now-focus";
 
-		this.config.onSelected = config.onSelected || function(current) { return false;  };
-		this.config.onActivate = config.onActivate || function(current) {  return false; };
 		this.config.onEdge = config.onEdge || function(dx, dy) { return false; };
 		this.config.onFocus = config.onFocus || function() { return false; };
 		this.config.onReady = config.onReady || function() { return false; };
+		this.config.onSelected = config.onSelected || function(current) { return false;  };
+		this.config.onActivate = config.onActivate || function(current) {  return false; };
+		this.config.onOnePlayer = config.onOnePlayer || function(current) { return false; };
+		this.config.onTwoPlayer = config.onTwoPlayer || function(current) { return false; };
 
 		this.focus = false;
 		this.current = 0;
@@ -148,6 +150,20 @@ class Grid {
 			current = this.current;
 		}
 		this.config.onActivate.call(this, current);
+	}
+
+	onePlayer(current) {
+		if (current === undefined) {
+			current = this.current;
+		}
+		this.config.onOnePlayer.call(this, current);
+	}
+
+	twoPlayer(current) {
+		if (current === undefined) {
+			current = this.current;
+		}
+		this.config.onTwoPlayer.call(this, current);
 	}
 
 	getCurrent() {

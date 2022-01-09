@@ -28,12 +28,16 @@ class Games {
 		this.good = null;
 		this.bad = null;
 		this.names = null;
+		this.years = null;
+
+		this.iamPlaying = false;
 
 		this.db = new loki("games.db");
 		this.users = this.db.addCollection("users");
 
 		this.played = PStore.get(STORE_PLAYED_ID) || {};
 		this.favorits = PStore.get(STORE_FAVORITS_ID) || {};
+		this.twoplayer = PStore.get(STORE_TWO_PLAYER_ID) || {};
 		this.notWorking = PStore.get(STORE_NOT_WORKING_ID) || {};
 
 		this.loaded();
@@ -60,7 +64,6 @@ class Games {
 		this.all = [];
 		this.good = [];
 		this.bad = [];
-		this.two = [];
 
 		var empty = {
 			counter: 0, 
@@ -73,6 +76,7 @@ class Games {
 
 			var play = this.played[oneGame.name] || empty;
 			var favorit = this.favorits[oneGame.name] || null;
+			var twoplayer = this.twoplayer[oneGame.name] || null;
 			var notWorking = this.notWorking[oneGame.name] === true;
 			var bad = oneGame.state.endsWith("is bad");
 			var best = oneGame.state.endsWith("is best available");
@@ -83,12 +87,12 @@ class Games {
 				year: oneGame.year,
 				description: oneGame.description,
 				manufacturer: oneGame.manufacturer,
-				players: oneGame.players,
 
 				first: new Date(play.first),
 				last: new Date(play.last),
 				counter: play.counter,
 				favorit: favorit,
+				twoplayer: twoplayer,
 				bad: bad,
 				best: best,
 				notWorking: notWorking,
@@ -103,10 +107,6 @@ class Games {
 			}
 			else {
 				this.good.push(card);
-
-				if (card.players > 1) {
-					this.two.push(card);
-				}
 			}
 
 			this.users.insert(card);
@@ -178,17 +178,6 @@ class Games {
 			var manufacturer = fetch(machine, "manufacturer");
 			var input = machine.getElementsByTagName("input");
 
-			var players = 1;
-			if (input.length) {
-				var value = input[0].getAttribute("service");
-				if (value == "yes") {
-					var value = input[0].getAttribute("players");
-					if (value) {
-						players = parseInt(value);
-					}
-				}
-			}
-
 			if (manufacturer == "<unknown>") {
 				manufacturer = ""
 			}
@@ -199,7 +188,6 @@ class Games {
 				description: description,
 				manufacturer: manufacturer,
 				state: state,
-				players: players
 			});
 		}
 
@@ -222,6 +210,10 @@ class Games {
 		});
 
 		this.makeRomList(roms);
+	}
+
+	isPlaying() {
+		return this.iamPlaying;
 	}
 
 	play(name, callback) {
@@ -248,14 +240,31 @@ class Games {
 		card.last = tracking.last;
 		card.counter = tracking.counter;
 
+		this.iamPlaying = true;
+
 		var cmd = resources.getId("shell_cmd_play", {"{name}": name});
 		executeShellCommand(cmd, (error, stdout, stderr) => { 
 			var running = error === null;
 
 			self.setWorking(card, running);
 
+			this.iamPlaying = false;
+
 			callback(running);
 		}); 
+	}
+
+	playClose(callback) {
+		if (this.isPlaying()) {
+			var cmd = resources.getId("shell_cmd_play_close");
+			executeShellCommand(cmd, (error, stdout, stderr) => { 
+				this.iamPlaying = false;
+				callback(true);
+			});
+		}
+		else {
+			callback(false);
+		}
 	}
 
 	search(text) {
@@ -305,12 +314,6 @@ class Games {
 
 	getBadBoys(cmpFunc) {
 		var results = this.bad;
-		results.sort(cmpFunc);
-		return results;
-	}
-
-	getTwoPlayers(cmpFunc) {
-		var results = this.two;
 		results.sort(cmpFunc);
 		return results;
 	}
@@ -375,6 +378,7 @@ class Games {
 		PStore.set(STORE_NOT_WORKING_ID, this.notWorking);
 	}
 
+	// Favorits
 	getFavorits(cmpFunc) {
 		return this.getStoredList(this.favorits, cmpFunc);
 	}
@@ -412,6 +416,48 @@ class Games {
 		}
 
 		this.setFavorit(name);
+		return true;
+	}
+
+	// Two Player
+
+	getTwoPlayers(cmpFunc) {
+		return this.getStoredList(this.twoplayer, cmpFunc);
+	}
+
+	hasTwoPlayer(name) {
+		return this.twoplayer[name] !== undefined;
+	}
+
+	clearTwoPlayer(name) {
+		var card = this.names[name];
+		card.twoplayer = false;
+
+		delete this.twoplayer[name];
+
+		PStore.set(STORE_TWO_PLAYER_ID, this.twoplayer);
+	}
+
+	setTwoPlayer(name) {
+		var card = this.names[name];
+		if (card) {
+			card.twoplayer = true;
+
+			this.twoplayer[name] = {
+				added: new Date(),
+			};
+
+			PStore.set(STORE_TWO_PLAYER_ID, this.twoplayer);
+		}
+	}
+
+	toggleTwoPlayer(name) {
+		if (this.hasTwoPlayer(name)) {
+			this.clearTwoPlayer(name);
+			return false;
+		}
+
+		this.setTwoPlayer(name);
 		return true;
 	}
 }

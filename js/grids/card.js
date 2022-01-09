@@ -64,7 +64,7 @@ class Card {
 				"<div class='card-manufacturer'>" + manufacturer + "</div>" +
 			"</div>";
 
-		if (this.counter || this.favorit || this.bad || this.notWorking || this.players > 1) {
+		if (this.counter || this.favorit || this.bad || this.notWorking || this.twoplayer) {
 			html += "<div class='card-special'>";
 
 			if (this.counter) {
@@ -91,7 +91,7 @@ class Card {
 				html += "<div class='card-special-item'>" + icon + "</div>";
 			}
 
-			if (this.players > 1) {
+			if (this.twoplayer) {
 				var icon = resources.buttonId({id: "two", on: on, focus: focus, height: 14});
 
 				html += "<div class='card-special-item'>" + icon + "</div>";
