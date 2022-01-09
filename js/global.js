@@ -34,6 +34,8 @@ const STORE_ALL_GAMES           = "games";
 const SHUFFLE_MAX               = 100;
 const CARDS_HISTORY_MAX         = 100;
 
+const TWO_PLAYER_KEY_COUNTER    = 50;
+
 // ---------------------------------------------------------------------------
 // Globals!
 

@@ -6,5 +6,7 @@
     "keySelect":                "ControlLeft Enter",
     "keyActivate":              "AltLeft",
     "keyOnePlayer":             "Digit1",
-    "keyTwoPlayer":             "Digit2"
+    "keyTwoPlayer":             "Digit2",
+    "playerOneKeys":            "code 105 (KEY_LEFT),code 106 (KEY_RIGHT),code 103 (KEY_UP),code 108 (KEY_DOWN),code 29 (KEY_LEFTCTRL),code 56 (KEY_LEFTALT),code 57 (KEY_SPACE),code 42 (KEY_LEFTSHIFT)",
+    "playerTwoKeys":            "code 32 (KEY_D),code 34 (KEY_G),code 19 (KEY_R),code 33 (KEY_F),code 30 (KEY_A),code 31 (KEY_S),code 16 (KEY_Q),code 17 (KEY_W)"
 }
