@@ -26,8 +26,9 @@ var KeyboardMonitor = {
 	playerTwoKeyCounter: 0,
 
 	isTwoPlayer: () => {
-		return	KeyboardMonitor.playerOneKeyCounter > KEY_PLAYER_COUNTER && 
-				KeyboardMonitor.playerTwoKeyCounter > KEY_PLAYER_COUNTER;
+		return
+			KeyboardMonitor.playerOneKeyCounter > KEY_PLAYER_COUNTER && 
+			KeyboardMonitor.playerTwoKeyCounter > KEY_PLAYER_COUNTER;
 	},
 
 	reset: () => {
@@ -46,15 +47,11 @@ var KeyboardMonitor = {
 		let shell_cmd_key_catch = resources.getId("shell_cmd_key_catch");
 		if (!shell_cmd_key_catch) return;
 
-		let oneKeys = resources.getId("playerOneKeys");
+		let oneKeys = resources.getId("keysPlayerOne");
 		if (!oneKeys) return;
 
-		let twoKeys = resources.getId("playerTwoKeys");
+		let twoKeys = resources.getId("keysPlayerTwo");
 		if (!twoKeys) return;
-
-		this.reset();
-		oneKeys = oneKeys.split(",");
-		twoKeys = twoKeys.split(",");
 
 		var child = child_process.spawn(shell_cmd_key_catch, [], {
 				encoding: 'utf8',

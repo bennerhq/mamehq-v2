@@ -85,7 +85,7 @@ class Application {
 					self.cards.show();
 					setTimeout(() => {
 						self.play.hide();
-					}, 0.5 * 1000);
+					}, 1 * 1000);
 				});
 			}
 		});
@@ -159,6 +159,8 @@ class Application {
 		let idle_time_poweroff_min = parseInt(resources.getId("idle_time_poweroff_min"));
 		if (!idle_time_poweroff_min) return;
 
+		var idle_time_hello_noice = idle_time_interval_min;
+
 		let poweroffChecker = (msecs) => {
 			let minutes = Math.round(msecs / 60000); // milliseconds -> minutes
 			if (minutes >= idle_time_poweroff_min) {
@@ -168,7 +170,8 @@ class Application {
 				else {
 					self.poweroff();
 				}
-			} else if (minutes >= idle_time_interval_min) {
+			} else if (minutes >= idle_time_hello_noice) {
+				idle_time_hello_time += idle_time_interval_min;
 				resources.playId('audio_waiting');
 			}
 		};
