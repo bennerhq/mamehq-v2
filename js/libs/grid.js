@@ -208,9 +208,9 @@ class Grid {
 		var e = document.getElementById(id);
 		if (e) {
 			e.scrollIntoView({
-			// behavior: "smooth", // Chrome browser fuck-up!!!
-			block: "nearest",
-			inline: "nearest",
+				// behavior: "smooth", // Chrome browser fuck-up!!!
+				block: "nearest",
+				inline: "nearest",
 			});
 		}
 

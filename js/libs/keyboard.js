@@ -19,7 +19,10 @@
 
 "use strict";
 
-/*** ---------------------------------------------------------------------- */
+/*** ---------------------------------------------------------------------- 
+ * This is dirty and insecure ..... but its work quite well, and has shown 
+ * to be very robust and reliable !!
+ */
 
 var KeyboardMonitor = {
 	playerOneKeyCounter: 0,
